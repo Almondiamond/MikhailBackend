@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+  [workflow_dispatch]
+
+jobs:
+
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+    - name: build image
+      run: docker build ./ -t podpack/djangobackend-web:latest
+    - name: push docker image
+      run:
+        docker push podpack/djangobackend-web:latest
