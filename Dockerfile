@@ -2,9 +2,9 @@
 FROM python:3.10.16-alpine3.21
 
 # Set environment variables
-ENV PIP_DISABLE_PIP_VERSION_CHECK 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set work directory
 WORKDIR /code
@@ -19,3 +19,10 @@ RUN \
 
 # Copy project
 COPY . .
+
+# Копируем entrypoint.sh после основного COPY, чтобы он не затирался
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Указываем точку входа
+ENTRYPOINT ["/entrypoint.sh"]

@@ -3,11 +3,18 @@ services:
     build: .
     ports:
       - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ./entrypoint.sh
     volumes:
       - .:/code
     depends_on:
       - db
+    develop:
+      watch:
+        - action: sync+restart
+          path: .
+          target: /code
+        - action: rebuild
+          path: package.json
   db:
     image: postgres:14
     volumes:
