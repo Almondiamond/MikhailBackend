@@ -100,7 +100,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 class PointsList(APIView):
     def get(self, request):
         url = 'https://b2b.taxi.tst.yandex.net/api/b2b/platform/pickup-points/list'
-        headers = {'Authorization': 'Bearer y2_AgAAAAD04omrAAAPeAAAAAACRpC94Qk6Z5rUTgOcTgYFECJllXYKFx8', 'Content-Type': 'application/json'}
+        headers = {'Authorization': 'Bearer test', 'Content-Type': 'application/json'}
         r = requests.post(url, headers=headers)
 
         return Response(r.json())
@@ -108,7 +108,7 @@ class PointsList(APIView):
 class ConfirmOffer(CreateAPIView):
     def post(self, request, *args, **kwargs):
         url = 'https://b2b.taxi.tst.yandex.net/api/b2b/platform/offers/confirm'
-        headers = {'Authorization': 'Bearer y2_AgAAAAD04omrAAAPeAAAAAACRpC94Qk6Z5rUTgOcTgYFECJllXYKFx8', 'Content-Type': 'application/json'}
+        headers = {'Authorization': 'Bearer test', 'Content-Type': 'application/json'}
         ser = CreateOfferSerializer(data=request.data)
         if ser.is_valid():
             print(ser.data)
